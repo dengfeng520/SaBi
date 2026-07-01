@@ -15,11 +15,11 @@
 
 #### Code structure
 
-app/src/main/java/com/example/sabi/
-├── controller/          # Controller: page navigation & business logic orchestration
-├── viewModel/           # ViewModel: UI state management & UI logic
-├── model/               # Model: data sources & data processing
-└── view/                # View: custom UI components & layouts
+**app/src/main/java/com/example/sabi/**
+* controller: page navigation & business logic orchestration
+* viewModel: UI state management & UI logic
+* model: data sources & data processing
+* view: custom UI components & layouts
 
 #### Show
 
