@@ -23,5 +23,4 @@
 
 #### Show
 
-<img src="DOC/screenshot/A03.JPG" width="250" />
-<img src="DOC/screenshot/A04.JPG" width="250" />
+<img src="DOC/screenshot/A03.JPG" width="250" /><img src="DOC/screenshot/A04.JPG" width="250" />
