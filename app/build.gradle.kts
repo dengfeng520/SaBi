@@ -54,4 +54,5 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 }
