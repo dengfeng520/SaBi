@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -19,9 +21,9 @@ android {
 
     buildTypes {
         release {
-            optimization {
-                enable = false
-            }
+//            optimization {
+//                enable = false
+//            }
         }
     }
 
@@ -55,4 +57,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.51.1")
+
+    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
 }
