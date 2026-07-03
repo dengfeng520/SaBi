@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import com.example.sabi.MainActivity
 import com.example.sabi.R
 
