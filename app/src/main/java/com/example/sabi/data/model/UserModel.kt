@@ -1,6 +1,6 @@
 package com.example.sabi.data.model
 
-// 用户信息Model
+// User Information Model
 data class UserModel(
     val userId: String = "",
     val userName: String = "",
@@ -8,13 +8,13 @@ data class UserModel(
     val token: String = "",
 )
 
-// 登录请求体
+// Login request body
 data class LoginRequest(
     val username: String,
     val password: String
 )
 
-// 登录响应
+// Login Response
 sealed class LoginResult {
     data class Success(val user: UserModel) : LoginResult()
     data class Error(val message: String) : LoginResult()

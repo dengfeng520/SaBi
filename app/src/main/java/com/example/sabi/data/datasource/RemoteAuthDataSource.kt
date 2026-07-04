@@ -5,14 +5,14 @@ import com.example.sabi.data.model.LoginResult
 import com.example.sabi.data.model.UserModel
 import kotlinx.coroutines.delay
 
-// 模拟远程数据源（实际项目可替换为 Retrofit 网络请求）
+// Simulate remote data source (in actual projects, it can be replaced with Retrofit network requests)
 class RemoteAuthDataSource {
 
     suspend fun login(request: LoginRequest): LoginResult {
-        // 模拟网络延迟
+        // 模Simulate network latency
         delay(1500)
 
-        // 模拟简单验证逻辑
+        // Simulate simple verification logic
         return if (request.username.isNotBlank() && request.password.isNotBlank()) {
             if (request.password.length >= 6) {
                 LoginResult.Success(
@@ -24,10 +24,10 @@ class RemoteAuthDataSource {
                     )
                 )
             } else {
-                LoginResult.Error("密码长度不能少于 6 位")
+                LoginResult.Error("The password length cannot be less than 6 characters")
             }
         } else {
-            LoginResult.Error("用户名或密码不能为空")
+            LoginResult.Error("The username or password cannot be empty")
         }
     }
 }
