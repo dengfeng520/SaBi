@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SaBi">
 
-        <!-- 启动页 SplashActivity -->
+        <!-- SplashActivity -->
         <activity
             android:name=".controller.SplashActivity"
             android:exported="true"
@@ -23,7 +23,18 @@
             </intent-filter>
         </activity>
 
-        <!-- 主界面 MainActivity（不再包含 LAUNCHER） -->
+        <!-- Login Activity -->
+        <activity
+            android:name=".controller.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SaBi">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
