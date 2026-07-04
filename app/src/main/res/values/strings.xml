@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SaBi</string>
-    <string name="app_slogan_title">في يوم من الأيام، ستصبح "SaBi" أيضًا فنًا.</string>
+    <string name="app_slogan_title">One day, SaBi will also become an art form.</string>
+    <string name="sigin_in_text">Sigin In</string>
 </resources>
