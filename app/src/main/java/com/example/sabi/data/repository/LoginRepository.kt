@@ -1,14 +1,14 @@
 package com.example.sabi.data.repository
 
-import com.example.sabi.data.datasource.RemoteAuthDataSource
+import com.example.sabi.data.datasource.LoginDataSource
 import com.example.sabi.data.model.LoginRequest
 import com.example.sabi.data.model.LoginResult
 
-class AuthRepository constructor(
-    private val remoteDataSource: RemoteAuthDataSource
+class LoginRepository constructor(
+    private val remoteDataSource: LoginDataSource
 ) {
     suspend fun login(username: String, password: String): LoginResult {
-        // 可在此添加数据校验、缓存等逻辑
+        // You can add data verification, caching, and other logics here
         val request = LoginRequest(username, password)
         return remoteDataSource.login(request)
     }

@@ -6,10 +6,10 @@ import com.example.sabi.data.model.UserModel
 import kotlinx.coroutines.delay
 
 // Simulate remote data source (in actual projects, it can be replaced with Retrofit network requests)
-class RemoteAuthDataSource {
+class LoginDataSource {
 
     suspend fun login(request: LoginRequest): LoginResult {
-        // 模Simulate network latency
+        // Simulate network latency
         delay(1500)
 
         // Simulate simple verification logic
