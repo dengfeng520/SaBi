@@ -104,6 +104,16 @@ class LoginViewModel(
         }
     }
 
+    fun loginWithApple() {
+        println("login with apple")
+    }
+    fun loginWithGoogle() {
+        println("login with google")
+    }
+    fun loginWithMicrosoft() {
+        println("login with microsoft")
+    }
+
     fun resetState() {
         _uiState.value = LoginUiState()
     }

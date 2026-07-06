@@ -1,17 +1,21 @@
 package com.example.sabi.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sabi.R
 import com.example.sabi.viewModel.LoginViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,6 +111,35 @@ fun LoginView(
                 }
             }
 
+            Spacer(modifier = Modifier.height(32.dp))
+
+            // Social Login Buttons
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                SocialLoginButton(
+                    iconRes = R.drawable.apple_sigin_icon,
+                    contentDescription = "Sign in with Apple",
+                    modifier = Modifier.weight(1f),
+                    onClick = { viewModel.loginWithApple() }
+                )
+
+                SocialLoginButton(
+                    iconRes = R.drawable.google_sigin_icon,
+                    contentDescription = "Sign in with Google",
+                    modifier = Modifier.weight(1f),
+                    onClick = { viewModel.loginWithGoogle() }
+                )
+
+                SocialLoginButton(
+                    iconRes = R.drawable.microsoft_sigin_icon,
+                    contentDescription = "Sign in with Microsoft",
+                    modifier = Modifier.weight(1f),
+                    onClick = { viewModel.loginWithMicrosoft() }
+                )
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             // Error Message
@@ -145,5 +178,28 @@ fun LoginView(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun SocialLoginButton(
+    iconRes: Int,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = modifier
+            .height(56.dp)
+            .padding(0.dp),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.outlinedButtonColors()
+    ) {
+        Image(
+            painter = painterResource(id = iconRes),
+            contentDescription = contentDescription,
+            modifier = Modifier.size(28.dp)
+        )
     }
 }
