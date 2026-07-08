@@ -3,4 +3,5 @@
     <string name="app_name">SaBi</string>
     <string name="app_slogan_title">في يوم من الأيام، سيصبح SaBi أيضًا فنًا.</string>
     <string name="sigin_in_text">تسجيل الدخول</string>
+    <string name="user_agreement">اتفاقية المستخدم</string>
 </resources>

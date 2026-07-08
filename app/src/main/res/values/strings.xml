@@ -2,4 +2,5 @@
     <string name="app_name">SaBi</string>
     <string name="app_slogan_title">One day, SaBi will also become an art form.</string>
     <string name="sigin_in_text">Sigin In</string>
+    <string name="user_agreement">Agreement</string>
 </resources>

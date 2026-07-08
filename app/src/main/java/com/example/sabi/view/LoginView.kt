@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sabi.R
 import com.example.sabi.viewModel.LoginViewModel
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -176,6 +177,22 @@ fun LoginView(
                         fontSize = 14.sp
                     )
                 }
+            }
+
+            // User Agreement Button
+            TextButton(
+                onClick = {
+
+                },
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 24.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.user_agreement),
+                    color = MaterialTheme.colorScheme.primary,
+                    fontSize = 14.sp
+                )
             }
         }
     }

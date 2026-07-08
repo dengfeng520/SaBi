@@ -3,4 +3,5 @@
     <string name="app_name">撒币</string>
     <string name="app_slogan_title">有一天，「撒币」也会成为一种艺术。</string>
     <string name="sigin_in_text">登录</string>
+    <string name="user_agreement">用户协议</string>
 </resources>
