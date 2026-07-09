@@ -114,6 +114,10 @@ class LoginViewModel(
         println("login with microsoft")
     }
 
+    fun clickUserAgreementButton() {
+        println("click user agreement button")
+    }
+
     fun resetState() {
         _uiState.value = LoginUiState()
     }

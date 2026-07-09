@@ -18,6 +18,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sabi.R
 import com.example.sabi.viewModel.LoginViewModel
 import androidx.compose.ui.res.stringResource
+import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,164 +34,170 @@ fun LoginView(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            // Title
-            Text(
-                text = "「撒币」",
-                fontSize = 32.sp,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(bottom = 32.dp)
-            )
-
-            // Username Field
-            OutlinedTextField(
-                value = uiState.username,
-                onValueChange = { viewModel.updateUsername(it) },
-                label = { Text("Username") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                isError = uiState.usernameError != null,
-                supportingText = {
-                    if (uiState.usernameError != null) {
-                        Text(
-                            text = uiState.usernameError!!,
-                            color = MaterialTheme.colorScheme.error,
-                            fontSize = 12.sp
-                        )
-                    }
-                }
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Password Field
-            OutlinedTextField(
-                value = uiState.password,
-                onValueChange = { viewModel.updatePassword(it) },
-                label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                visualTransformation = if (passwordVisible) {
-                    VisualTransformation.None
-                } else {
-                    PasswordVisualTransformation()
-                },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                isError = uiState.passwordError != null,
-                supportingText = {
-                    if (uiState.passwordError != null) {
-                        Text(
-                            text = uiState.passwordError!!,
-                            color = MaterialTheme.colorScheme.error,
-                            fontSize = 12.sp
-                        )
-                    }
-                },
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Login Button
-            Button(
-                onClick = { viewModel.login() },
+        Box(modifier = Modifier.fillMaxSize()) {
+            // 主要登录内容 - 保持居中
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                enabled = !uiState.isLoading
+                    .fillMaxSize()
+                    .padding(32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                if (uiState.isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                } else {
-                    Text("Login", fontSize = 16.sp)
-                }
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // Social Login Buttons
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                SocialLoginButton(
-                    iconRes = R.drawable.apple_sigin_icon,
-                    contentDescription = "Sign in with Apple",
-                    modifier = Modifier.weight(1f),
-                    onClick = { viewModel.loginWithApple() }
+                // Title
+                Text(
+                    text = "「撒币」",
+                    fontSize = 32.sp,
+                    fontFamily = FontFamily.Monospace,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(bottom = 32.dp)
                 )
 
-                SocialLoginButton(
-                    iconRes = R.drawable.google_sigin_icon,
-                    contentDescription = "Sign in with Google",
-                    modifier = Modifier.weight(1f),
-                    onClick = { viewModel.loginWithGoogle() }
+                // Username Field
+                OutlinedTextField(
+                    value = uiState.username,
+                    onValueChange = { viewModel.updateUsername(it) },
+                    label = { Text("Username") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    isError = uiState.usernameError != null,
+                    supportingText = {
+                        if (uiState.usernameError != null) {
+                            Text(
+                                text = uiState.usernameError!!,
+                                color = MaterialTheme.colorScheme.error,
+                                fontSize = 12.sp
+                            )
+                        }
+                    }
                 )
 
-                SocialLoginButton(
-                    iconRes = R.drawable.microsoft_sigin_icon,
-                    contentDescription = "Sign in with Microsoft",
-                    modifier = Modifier.weight(1f),
-                    onClick = { viewModel.loginWithMicrosoft() }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Password Field
+                OutlinedTextField(
+                    value = uiState.password,
+                    onValueChange = { viewModel.updatePassword(it) },
+                    label = { Text("Password") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    visualTransformation = if (passwordVisible) {
+                        VisualTransformation.None
+                    } else {
+                        PasswordVisualTransformation()
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    isError = uiState.passwordError != null,
+                    supportingText = {
+                        if (uiState.passwordError != null) {
+                            Text(
+                                text = uiState.passwordError!!,
+                                color = MaterialTheme.colorScheme.error,
+                                fontSize = 12.sp
+                            )
+                        }
+                    },
                 )
-            }
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-            // Error Message
-            if (uiState.errorMessage != null) {
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer
-                    ),
-                    modifier = Modifier.fillMaxWidth()
+                // Login Button
+                Button(
+                    onClick = { viewModel.login() },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
+                    enabled = !uiState.isLoading
                 ) {
-                    Text(
-                        text = uiState.errorMessage!!,
-                        color = MaterialTheme.colorScheme.onErrorContainer,
-                        modifier = Modifier.padding(16.dp),
-                        fontSize = 14.sp
+                    if (uiState.isLoading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    } else {
+                        Text("Login", fontSize = 16.sp)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(32.dp))
+
+                // Social Login Buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    SocialLoginButton(
+                        iconRes = R.drawable.apple_sigin_icon,
+                        contentDescription = "Sign in with Apple",
+                        modifier = Modifier.weight(1f),
+                        onClick = { viewModel.loginWithApple() }
+                    )
+
+                    SocialLoginButton(
+                        iconRes = R.drawable.google_sigin_icon,
+                        contentDescription = "Sign in with Google",
+                        modifier = Modifier.weight(1f),
+                        onClick = { viewModel.loginWithGoogle() }
+                    )
+
+                    SocialLoginButton(
+                        iconRes = R.drawable.microsoft_sigin_icon,
+                        contentDescription = "Sign in with Microsoft",
+                        modifier = Modifier.weight(1f),
+                        onClick = { viewModel.loginWithMicrosoft() }
                     )
                 }
-            }
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            // Success Message
-            if (uiState.isSuccess) {
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Login successful! Welcome ${uiState.user?.userName ?: ""}",
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.padding(16.dp),
-                        fontSize = 14.sp
-                    )
+                // Error Message
+                if (uiState.errorMessage != null) {
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = uiState.errorMessage!!,
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.padding(16.dp),
+                            fontSize = 14.sp
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Success Message
+                if (uiState.isSuccess) {
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Login successful! Welcome ${uiState.user?.userName ?: ""}",
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.padding(16.dp),
+                            fontSize = 14.sp
+                        )
+                    }
                 }
             }
 
             // User Agreement Button
             TextButton(
                 onClick = {
-
+                    viewModel.clickUserAgreementButton()
                 },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 24.dp)
+                    .heightIn(max = 60.dp)
+                    .padding(bottom = 16.dp)
             ) {
                 Text(
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp),
                     text = stringResource(R.string.user_agreement),
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 14.sp
