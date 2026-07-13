@@ -18,8 +18,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sabi.R
 import com.example.sabi.viewModel.LoginViewModel
 import androidx.compose.ui.res.stringResource
-import androidx.compose.foundation.background
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
