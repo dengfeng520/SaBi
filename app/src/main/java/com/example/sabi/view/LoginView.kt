@@ -19,6 +19,16 @@ import com.example.sabi.R
 import com.example.sabi.viewModel.LoginViewModel
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,16 +38,53 @@ fun LoginView(
     val uiState by viewModel.uiState.collectAsState()
     var passwordVisible by remember { mutableStateOf(false) }
 
+    // 获取系统栏高度
+    val configuration = LocalConfiguration.current
+    val density = LocalDensity.current
+    val navigationBarHeight = with(density) {
+        // 获取导航栏高度（如果有的话）
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            configuration.densityDpi.let { dpi ->
+                // 使用系统资源获取导航栏高度
+                val resourceId = androidx.compose.ui.platform.LocalContext.current.resources
+                    .getIdentifier("navigation_bar_height", "dimen", "android")
+                if (resourceId > 0) {
+                    androidx.compose.ui.platform.LocalContext.current.resources
+                        .getDimensionPixelSize(resourceId).toDp()
+                } else {
+                    0.dp
+                }
+            }
+        } else {
+            0.dp
+        }
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            // 主要登录内容 - 保持居中
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .systemBarsPadding() // 添加系统栏内边距
+        ) {
+            // 主要登录内容 - 使用可滚动的 Column 防止内容被裁剪
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(32.dp),
+                    .padding(
+                        start = 32.dp,
+                        end = 32.dp,
+                        top = 32.dp,
+                        bottom = if (navigationBarHeight > 0.dp) {
+                            // 为导航栏预留空间 + 用户协议按钮的空间
+                            navigationBarHeight + 80.dp
+                        } else {
+                            80.dp // 默认预留空间
+                        }
+                    )
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -182,24 +229,42 @@ fun LoginView(
                         )
                     }
                 }
+
+                // 添加底部空间占位，确保内容不被用户协议按钮遮挡
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // User Agreement Button
-            TextButton(
-                onClick = {
-                    viewModel.clickUserAgreementButton()
-                },
+            // User Agreement Button - 固定在底部，考虑导航栏
+            Box(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .heightIn(max = 60.dp)
-                    .padding(bottom = 16.dp)
+                    .fillMaxWidth()
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = if (navigationBarHeight > 0.dp) {
+                            // 为导航栏预留空间
+                            navigationBarHeight + 8.dp
+                        } else {
+                            16.dp
+                        }
+                    )
             ) {
-                Text(
-                    modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-                    text = stringResource(R.string.user_agreement),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 14.sp
-                )
+                TextButton(
+                    onClick = {
+                        viewModel.clickUserAgreementButton()
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 60.dp)
+                ) {
+                    Text(
+                        modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                        text = stringResource(R.string.user_agreement),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontSize = 14.sp
+                    )
+                }
             }
         }
     }
